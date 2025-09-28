@@ -55,3 +55,4 @@ pnpm dev
 - Create AGOL/Mapbox visualizations and embed.
 - Add NGO cohorts; add tree-specific tables if you track real counts.
 - Write RLS policies to limit inserts to teacher/admin roles for activities.
+# edtech
