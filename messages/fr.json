@@ -1,0 +1,12 @@
+{
+  "nav.features": "Fonctionnalités",
+  "nav.audiences": "Pour qui",
+  "nav.impact": "Impact",
+  "nav.pricing": "Tarifs",
+  "nav.contact": "Contact",
+  "hero.title": "Les élèves au Kenya ont planté plus de {count} arbres. À vous !",
+  "hero.subtitle": "Leafscapes connecte écoles, sponsors et ONG pour animer des Clubs Verts ludifiés avec un impact transparent et vérifiable.",
+  "cta.schools": "Pour les écoles",
+  "cta.corporates": "Pour les entreprises",
+  "cta.ngos": "Pour les ONG"
+}
