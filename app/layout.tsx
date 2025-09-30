@@ -1,17 +1,28 @@
-import type { Metadata } from 'next';
-import './globals.css';
-
-export const metadata: Metadata = {
-  title: 'Leafscapes',
-  description: 'EdTech for climate action – built in Kenya, for the world.'
-};
+// app/layout.tsx
+import Script from 'next/script';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const SEGMENT_KEY = process.env.NEXT_PUBLIC_SEGMENT_WRITE_KEY;
+
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
+      <body>
         {children}
+
+        {/* Load Segment only if a key is set */}
+        {SEGMENT_KEY ? (
+          <Script
+            id="segment"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(){var analytics=window.analytics=window.analytics||[]; ... // your snippet
+              `,
+            }}
+          />
+        ) : null}
       </body>
     </html>
   );
 }
+
