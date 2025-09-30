@@ -9,18 +9,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
 
-        {/* Load Segment only if a key is set */}
-        {SEGMENT_KEY ? (
-          <Script
-            id="segment"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                !function(){var analytics=window.analytics=window.analytics||[]; ... // your snippet
-              `,
-            }}
-          />
-        ) : null}
+        
       </body>
     </html>
   );
