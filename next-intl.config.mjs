@@ -1,8 +1,10 @@
-// next.config.mjs
-import createNextIntlPlugin from 'next-intl/plugin';
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
-
-export default withNextIntl({
-  reactStrictMode: true
-});
+// next-intl.config.mjs (root)
+export default {
+  // Your three locales:
+  locales: ['en', 'fr', 'sw'],
+  // Default:
+  defaultLocale: 'en',
+  // Keep urls clean like /en/... only when needed
+  localePrefix: 'as-needed'
+};
 
