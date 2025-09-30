@@ -1,25 +1,23 @@
 // middleware.ts
-import createMiddleware from 'next-intl/middleware';
 import {NextResponse} from 'next/server';
-import intlConfig from './next-intl.config';
+import type {NextRequest} from 'next/server';
 
-const intlMiddleware = createMiddleware(intlConfig);
-
-export default function middleware(req: Request) {
+export default function middleware(req: NextRequest) {
   const url = new URL(req.url);
 
-  // Redirect naked root to your default locale
+  // Only touch the naked root
   if (url.pathname === '/') {
     return NextResponse.redirect(new URL('/en', req.url));
   }
 
-  return intlMiddleware(req);
+  // Do nothing for everything else
+  return NextResponse.next();
 }
 
 export const config = {
-  // Match root and any localized routes
-  matcher: ['/', '/(en|fr|sw)/:path*']
+  matcher: ['/', '/((?!_next|api|favicon.ico|static|public).*)'],
 };
+
 
 
 
