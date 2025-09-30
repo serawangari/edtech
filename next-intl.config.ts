@@ -1,8 +1,15 @@
 // next-intl.config.ts
-export const locales = ['en'] as const;      // add 'sw' later if you want
-export const defaultLocale = 'en';
-export const localePrefix = 'as-needed';
+export const locales = ['en'] as const;
+export type Locale = typeof locales[number];
 
-const config = {locales, defaultLocale, localePrefix};
+export const defaultLocale: Locale = 'en';
+export const localePrefix = 'as-needed' as const;
+
+const config = {
+  locales,
+  defaultLocale,
+  localePrefix
+} as const;
+
 export default config;
 
