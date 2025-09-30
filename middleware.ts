@@ -1,10 +1,14 @@
 // middleware.ts
 import createMiddleware from 'next-intl/middleware';
-import intl from './next-intl.config.mjs';
 
-export default createMiddleware(intl);
+export default createMiddleware({
+  locales: ['en', 'fr', 'sw'],
+  defaultLocale: 'en',
+  localePrefix: 'as-needed'
+});
 
 export const config = {
   matcher: ['/', '/(en|fr|sw)/:path*']
 };
+
 
