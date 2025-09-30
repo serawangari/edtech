@@ -1,22 +1,15 @@
-// TEMP minimal middleware to avoid 500s
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export default createMiddleware({
+  locales: ['en'],
+  defaultLocale: 'en',
+  // no prefix when there's only one locale
+  localePrefix: 'never',
+});
 
-  // redirect root to default locale
-  if (pathname === '/') {
-    const url = req.nextUrl.clone();
-    url.pathname = '/en';
-    return NextResponse.redirect(url);
-  }
+export const config = {
+  matcher: ['/', '/(en)/:path*'],
+};
 
-  // let everything else through
-  return NextResponse.next();
-}
-
-// run on all paths (including '/')
-export const config = { matcher: ['/:path*'] };
 
 
