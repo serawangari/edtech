@@ -1,22 +1,34 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+// app/[locale]/layout.tsx
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages, getLocale} from 'next-intl/server';
+import '../globals.css';
 
-export function generateStaticParams() {
-  return [{locale:'en'},{locale:'fr'},{locale:'sw'}];
-}
+export const metadata = {
+  title: 'Leafscapes',
+  description: 'Environmental EdTech for schools, NGOs & corporates'
+};
 
-export default async function LocaleLayout({
-  children, params: { locale }
-}: { children: React.ReactNode; params: { locale: 'en'|'fr'|'sw' } }) {
-  let messages;
-  try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
-  } catch (e) {
-    notFound();
-  }
+export default async function RootLayout({
+  children,
+  params
+}: {
+  children: React.ReactNode;
+  params: {locale: string};
+}) {
+  // Ensure locale is valid:
+  const locale = params.locale ?? (await getLocale());
+
+  // Load messages for this locale
+  const messages = await getMessages();
+
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
+
